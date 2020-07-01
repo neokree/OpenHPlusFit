@@ -93,7 +93,7 @@ public class SingleCircleData implements JsonLizable, Parcelable {
             jSONObject.put("hour", this.hour);
             jSONObject.put("minute", this.minute);
             jSONObject.put("second", this.second);
-            jSONObject.put(LogContract.SessionColumns.NUMBER, this.number);
+            jSONObject.put("number", this.number);
             JSONArray jSONArray = new JSONArray();
             if (this.detail != null && this.detail.size() > 0) {
                 for (int i = 0; i < this.detail.size(); i++) {

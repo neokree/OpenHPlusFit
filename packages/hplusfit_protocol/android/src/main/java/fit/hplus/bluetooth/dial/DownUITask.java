@@ -113,7 +113,7 @@ public class DownUITask extends AsyncTask<Void, Void, Boolean> {
                         });
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 this.handler.post(new Runnable() {
                     public void run() {
                         if (!TextUtils.isEmpty(e.getMessage())) {

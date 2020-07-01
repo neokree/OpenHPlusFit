@@ -108,7 +108,7 @@ public class DownTxtTask extends AsyncTask<Void, Void, Boolean> {
                         return false;
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 this.handler.post(new Runnable() {
                     public void run() {
                         DownTxtTask.this.mDfuFileStatusCallback.onFailOTAFile(e.getMessage());

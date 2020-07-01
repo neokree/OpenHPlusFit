@@ -7,6 +7,8 @@ import fit.hplus.bluetooth.bean.AlarmClockBean;
 import fit.hplus.bluetooth.bean.DeviceSettingBean;
 import fit.hplus.bluetooth.bean.WeatherForecast;
 import fit.hplus.bluetooth.util.HexUtil;
+import it.neokree.hplusfitprotocol.Framer;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.List;
@@ -37,7 +39,7 @@ public class BleSend implements IBleSend {
 
     public void sendDateCommand() {
         Calendar instance = Calendar.getInstance();
-        int i = instance.get(1);
+        int i = instance.get(Calendar.YEAR);
         this.mHPlusBleManager.sendDataWrite(new byte[]{8, (byte) (i >> 8), (byte) (i & 255), (byte) (instance.get(2) + 1), (byte) instance.get(5)});
     }
 

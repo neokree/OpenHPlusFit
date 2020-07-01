@@ -97,7 +97,7 @@ public class HRVData implements JsonLizable, Parcelable {
             int i2 = i * 2;
             int i3 = i2 + 34;
             if (i3 < bArr.length) {
-                byte b = (bArr[i2 + 35] & 255) | ((bArr[i3] << 8) & 65280);
+                byte b = (byte) ((bArr[i2 + 35] & 255) | ((bArr[i3] << 8) & 65280));
                 this.IBIIntervals.add(Integer.valueOf(b == 0 ? 0 : 60000 / b));
             }
         }

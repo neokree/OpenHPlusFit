@@ -176,7 +176,8 @@ public class AllDayTenMinuteThermometer implements JsonLizable, Parcelable {
         }
         this.month = bArr[2] & 255;
         this.day = bArr[3] & 255;
-        this.year + HelpFormatter.DEFAULT_OPT_PREFIX + String.format(Locale.getDefault(), "%02d", new Object[]{Integer.valueOf(this.month)}) + HelpFormatter.DEFAULT_OPT_PREFIX + String.format(Locale.getDefault(), "%02d", new Object[]{Integer.valueOf(this.day)});
+        // TODO: Capire cosa faceva questa riga
+        // this.year + HelpFormatter.DEFAULT_OPT_PREFIX + String.format(Locale.getDefault(), "%02d", new Object[]{Integer.valueOf(this.month)}) + HelpFormatter.DEFAULT_OPT_PREFIX + String.format(Locale.getDefault(), "%02d", new Object[]{Integer.valueOf(this.day)});
         String[] split = this.simpleDateFormatDay.format(new Date(System.currentTimeMillis())).split(" ")[1].split(":");
         int checkCount = checkCount(Integer.valueOf(split[0]).intValue(), Integer.valueOf(split[1]).intValue());
         int length = (((bArr.length - 4) - 13) - 36) / 4;

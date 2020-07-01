@@ -85,7 +85,7 @@ public class RealSingleHealthBean implements JsonLizable, Parcelable {
         this.hour = bArr[5] & 255;
         this.minute = bArr[6] & 255;
         this.second = bArr[7] & 255;
-        byte b = bArr[8] & 255;
+        byte b = (byte) (bArr[8] & 255);
         if (b == 1) {
             this.hasHR = true;
         } else if (b == 2) {
@@ -104,41 +104,35 @@ public class RealSingleHealthBean implements JsonLizable, Parcelable {
 
     public static JSONArray unPackList(List<RealSingleHealthBean> list) {
         JSONArray jSONArray;
-        try {
-            jSONArray = new JSONArray();
-            int i = 0;
-            while (i < list.size()) {
-                try {
-                    JSONObject jSONObject = new JSONObject();
-                    jSONObject.put("year", list.get(i).getYear());
-                    jSONObject.put("month", list.get(i).getMonth());
-                    jSONObject.put("day", list.get(i).getDay());
-                    jSONObject.put("hour", list.get(i).getHour());
-                    jSONObject.put("minute", list.get(i).getMinute());
-                    jSONObject.put("second", list.get(i).getSecond());
-                    jSONObject.put("hasHR", list.get(i).isHasHR());
-                    jSONObject.put("hasBR", list.get(i).isHasBR());
-                    jSONObject.put("hasBO", list.get(i).isHasBO());
-                    jSONObject.put("hasTEMP", list.get(i).isHasTEMP());
-                    jSONObject.put("heart", list.get(i).getHeart());
-                    jSONObject.put("SBP", list.get(i).getSBP());
-                    jSONObject.put("DBP", list.get(i).getDBP());
-                    jSONObject.put("bloodOxygen", list.get(i).getBloodOxygen());
-                    jSONObject.put("temperature", (double) list.get(i).getTemperature());
-                    jSONArray.put(jSONObject);
-                    i++;
-                } catch (JSONException e) {
-                    e = e;
-                    e.printStackTrace();
-                    return jSONArray;
-                }
+
+        jSONArray = new JSONArray();
+        int i = 0;
+        while (i < list.size()) {
+            try {
+                JSONObject jSONObject = new JSONObject();
+                jSONObject.put("year", list.get(i).getYear());
+                jSONObject.put("month", list.get(i).getMonth());
+                jSONObject.put("day", list.get(i).getDay());
+                jSONObject.put("hour", list.get(i).getHour());
+                jSONObject.put("minute", list.get(i).getMinute());
+                jSONObject.put("second", list.get(i).getSecond());
+                jSONObject.put("hasHR", list.get(i).isHasHR());
+                jSONObject.put("hasBR", list.get(i).isHasBR());
+                jSONObject.put("hasBO", list.get(i).isHasBO());
+                jSONObject.put("hasTEMP", list.get(i).isHasTEMP());
+                jSONObject.put("heart", list.get(i).getHeart());
+                jSONObject.put("SBP", list.get(i).getSBP());
+                jSONObject.put("DBP", list.get(i).getDBP());
+                jSONObject.put("bloodOxygen", list.get(i).getBloodOxygen());
+                jSONObject.put("temperature", (double) list.get(i).getTemperature());
+                jSONArray.put(jSONObject);
+                i++;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return jSONArray;
             }
-        } catch (JSONException e2) {
-            e = e2;
-            jSONArray = null;
-            e.printStackTrace();
-            return jSONArray;
         }
+
         return jSONArray;
     }
 

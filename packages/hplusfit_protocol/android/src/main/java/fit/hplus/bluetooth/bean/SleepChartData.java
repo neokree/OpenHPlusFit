@@ -81,7 +81,7 @@ public class SleepChartData implements JsonLizable, Parcelable {
             for (int i = 0; i < length; i++) {
                 SleepDetail sleepDetail = new SleepDetail();
                 int i2 = i * 2;
-                byte b = ((bArr[i2 + 9] & 255) << 8) | (bArr[i2 + 8] & 255);
+                byte b = (byte) (((bArr[i2 + 9] & 255) << 8) | (bArr[i2 + 8] & 255));
                 int unused = sleepDetail.sleepType = b >> 12;
                 int unused2 = sleepDetail.sleepTime = b & 255;
                 this.detailData.add(sleepDetail);

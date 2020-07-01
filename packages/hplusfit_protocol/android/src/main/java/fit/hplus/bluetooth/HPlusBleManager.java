@@ -191,7 +191,7 @@ public class HPlusBleManager extends BleManager<BleManagerCallbacks> implements 
             LogUtil.i(access$400, "onDataUIReceived = " + HexUtil.encodeHexStr(data.getValue()));
             if (data.getValue() != null && data.getValue().length > 0) {
                 byte[] value = data.getValue();
-                byte b = value[0] & 255;
+                byte b = (byte) (value[0] & 255);
                 if (b == 241) {
                     String encodeHexStr = HexUtil.encodeHexStr(new byte[]{value[2], value[3]});
                     byte b2 = value[4];
@@ -233,7 +233,7 @@ public class HPlusBleManager extends BleManager<BleManagerCallbacks> implements 
                     }
                 } else if (b != 249) {
                     String encodeHexStr2 = HexUtil.encodeHexStr(new byte[]{value[2], value[3]});
-                    byte b3 = value[4] & 255;
+                    byte b3 = (byte) (value[4] & 255);
                     if (encodeHexStr2.equals(HPlusBleManager.this.resCurrentCrc) && b3 == 1) {
                         HPlusBleManager.access$1308(HPlusBleManager.this);
                         HPlusBleManager.access$908(HPlusBleManager.this);
@@ -305,7 +305,7 @@ public class HPlusBleManager extends BleManager<BleManagerCallbacks> implements 
             String access$400 = HPlusBleManager.TAG;
             LogUtil.d(access$400, "onDataUISent = " + HexUtil.encodeHexStr(data.getValue()));
             if (data.getValue() != null && data.getValue().length > 0) {
-                byte b = data.getValue()[0] & 255;
+                byte b = (byte) (data.getValue()[0] & 255);
                 if ((b == 245 || b == 246) && HPlusBleManager.this.mSendCommand != null) {
                     HPlusBleManager.this.mSendCommand.reCancel();
                 }
@@ -322,16 +322,6 @@ public class HPlusBleManager extends BleManager<BleManagerCallbacks> implements 
     private byte[] singleCircleByte;
     private byte[] singleWorkOutByte;
     private byte[] sleepChartByte;
-
-    @Deprecated
-    public /* synthetic */ void onBatteryValueReceived(BluetoothDevice bluetoothDevice, int i) {
-        BleManagerCallbacks.CC.$default$onBatteryValueReceived(this, bluetoothDevice, i);
-    }
-
-    @Deprecated
-    public /* synthetic */ boolean shouldEnableBatteryLevelNotifications(BluetoothDevice bluetoothDevice) {
-        return BleManagerCallbacks.CC.$default$shouldEnableBatteryLevelNotifications(this, bluetoothDevice);
-    }
 
     static /* synthetic */ int access$1308(HPlusBleManager hPlusBleManager) {
         int i = hPlusBleManager.resFileCurrentIndex;

@@ -70,14 +70,14 @@ public class MapData implements JsonLizable, Parcelable {
         if (bArr.length >= 12) {
             this.index = bArr[11] & 255;
         }
-        byte b = (bArr[12] & 255) | ((bArr[13] & 255) << 8) | ((bArr[14] & 255) << 16) | ((bArr[15] & 255) << 24);
+        byte b = (byte) ((bArr[12] & 255) | ((bArr[13] & 255) << 8) | ((bArr[14] & 255) << 16) | ((bArr[15] & 255) << 24));
         if (bArr.length >= 16) {
             List<Double> list = this.mLng;
             double d = (double) b;
             Double.isNaN(d);
             list.add(Double.valueOf((d * 1.0d) / 1000000.0d));
         }
-        byte b2 = (bArr[16] & 255) | ((bArr[17] & 255) << 8) | ((bArr[18] & 255) << 16) | ((bArr[19] & 255) << 24);
+        byte b2 = (byte) ((bArr[16] & 255) | ((bArr[17] & 255) << 8) | ((bArr[18] & 255) << 16) | ((bArr[19] & 255) << 24));
         if (bArr.length >= 20) {
             List<Double> list2 = this.mLat;
             double d2 = (double) b2;
@@ -91,24 +91,24 @@ public class MapData implements JsonLizable, Parcelable {
             this.number = bArr[1];
         }
         if (bArr.length >= 12) {
-            byte b = (bArr[4] & 255) | ((bArr[5] & 255) << 8) | ((bArr[6] & 255) << 16) | ((bArr[7] & 255) << 24);
+            byte b = (byte) ((bArr[4] & 255) | ((bArr[5] & 255) << 8) | ((bArr[6] & 255) << 16) | ((bArr[7] & 255) << 24));
             List<Double> list = this.mLng;
             double d = (double) b;
             Double.isNaN(d);
             list.add(Double.valueOf((d * 1.0d) / 1000000.0d));
-            byte b2 = (bArr[8] & 255) | ((bArr[9] & 255) << 8) | ((bArr[10] & 255) << 16) | ((bArr[11] & 255) << 24);
+            byte b2 = (byte) ((bArr[8] & 255) | ((bArr[9] & 255) << 8) | ((bArr[10] & 255) << 16) | ((bArr[11] & 255) << 24));
             List<Double> list2 = this.mLat;
             double d2 = (double) b2;
             Double.isNaN(d2);
             list2.add(Double.valueOf((d2 * 1.0d) / 1000000.0d));
         }
         if (bArr.length >= 20) {
-            byte b3 = (bArr[12] & 255) | ((bArr[13] & 255) << 8) | ((bArr[14] & 255) << 16) | ((bArr[15] & 255) << 24);
+            byte b3 = (byte) ((bArr[12] & 255) | ((bArr[13] & 255) << 8) | ((bArr[14] & 255) << 16) | ((bArr[15] & 255) << 24));
             List<Double> list3 = this.mLng;
             double d3 = (double) b3;
             Double.isNaN(d3);
             list3.add(Double.valueOf((d3 * 1.0d) / 1000000.0d));
-            byte b4 = ((bArr[19] & 255) << 24) | (bArr[16] & 255) | ((bArr[17] & 255) << 8) | ((bArr[18] & 255) << 16);
+            byte b4 = (byte) (((bArr[19] & 255) << 24) | (bArr[16] & 255) | ((bArr[17] & 255) << 8) | ((bArr[18] & 255) << 16));
             List<Double> list4 = this.mLat;
             double d4 = (double) b4;
             Double.isNaN(d4);
@@ -204,43 +204,37 @@ public class MapData implements JsonLizable, Parcelable {
     public JSONObject toJson() {
         JSONObject jSONObject;
         JSONException e;
+
+        jSONObject = new JSONObject();
         try {
-            jSONObject = new JSONObject();
-            try {
-                jSONObject.put(LogContract.SessionColumns.NUMBER, this.number);
-                jSONObject.put("year", this.year);
-                jSONObject.put("month", this.month);
-                jSONObject.put("day", this.day);
-                jSONObject.put("hour", this.hour);
-                jSONObject.put("minute", this.minute);
-                jSONObject.put("second", this.second);
-                jSONObject.put("index", this.index);
-                JSONArray jSONArray = new JSONArray();
-                if (this.mLat != null && this.mLat.size() > 0) {
-                    for (int i = 0; i < this.mLat.size(); i++) {
-                        jSONArray.put(this.mLat.get(i));
-                    }
+            jSONObject.put("number", this.number);
+            jSONObject.put("year", this.year);
+            jSONObject.put("month", this.month);
+            jSONObject.put("day", this.day);
+            jSONObject.put("hour", this.hour);
+            jSONObject.put("minute", this.minute);
+            jSONObject.put("second", this.second);
+            jSONObject.put("index", this.index);
+            JSONArray jSONArray = new JSONArray();
+            if (this.mLat != null && this.mLat.size() > 0) {
+                for (int i = 0; i < this.mLat.size(); i++) {
+                    jSONArray.put(this.mLat.get(i));
                 }
-                JSONArray jSONArray2 = new JSONArray();
-                if (this.mLng != null && this.mLng.size() > 0) {
-                    for (int i2 = 0; i2 < this.mLng.size(); i2++) {
-                        jSONArray2.put(this.mLng.get(i2));
-                    }
-                }
-                jSONObject.put("mLat", jSONArray2);
-                jSONObject.put("mLng", jSONArray);
-            } catch (JSONException e2) {
-                e = e2;
-                e.printStackTrace();
-                return jSONObject;
             }
-        } catch (JSONException e3) {
-            JSONException jSONException = e3;
-            jSONObject = null;
-            e = jSONException;
+            JSONArray jSONArray2 = new JSONArray();
+            if (this.mLng != null && this.mLng.size() > 0) {
+                for (int i2 = 0; i2 < this.mLng.size(); i2++) {
+                    jSONArray2.put(this.mLng.get(i2));
+                }
+            }
+            jSONObject.put("mLat", jSONArray2);
+            jSONObject.put("mLng", jSONArray);
+        } catch (JSONException e2) {
+            e = e2;
             e.printStackTrace();
             return jSONObject;
         }
+
         return jSONObject;
     }
 

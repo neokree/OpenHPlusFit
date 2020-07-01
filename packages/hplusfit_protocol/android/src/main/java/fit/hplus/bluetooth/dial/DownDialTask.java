@@ -107,7 +107,7 @@ public class DownDialTask extends AsyncTask<Void, Void, Boolean> {
                     inputStreamReader2.close();
                     DialFileUtil.analysisLayoutJson(stringBuffer2.toString());
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 this.handler.post(new Runnable() {
                     public void run() {
                         if (!TextUtils.isEmpty(e.getMessage())) {

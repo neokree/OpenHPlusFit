@@ -117,24 +117,16 @@ public class TenMinuteData implements JsonLizable, Parcelable {
 
     public JSONObject toJson() {
         JSONObject jSONObject;
-        JSONException e;
         try {
             jSONObject = new JSONObject();
-            try {
-                jSONObject.put("heart", this.heart);
-                jSONObject.put("step", this.step);
-                jSONObject.put("sequence", this.sequence);
-                jSONObject.put("DBP", this.DBP);
-                jSONObject.put("SBP", this.SBP);
-            } catch (JSONException e2) {
-                e = e2;
-            }
-        } catch (JSONException e3) {
-            JSONException jSONException = e3;
-            jSONObject = null;
-            e = jSONException;
+            jSONObject.put("heart", this.heart);
+            jSONObject.put("step", this.step);
+            jSONObject.put("sequence", this.sequence);
+            jSONObject.put("DBP", this.DBP);
+            jSONObject.put("SBP", this.SBP);
+        } catch (JSONException e) {
             e.printStackTrace();
-            return jSONObject;
+            return null;
         }
         return jSONObject;
     }
@@ -145,25 +137,18 @@ public class TenMinuteData implements JsonLizable, Parcelable {
             jSONArray = new JSONArray();
             int i = 0;
             while (i < list.size()) {
-                try {
-                    JSONObject jSONObject = new JSONObject();
-                    jSONObject.put("heart", list.get(i).getHeart());
-                    jSONObject.put("step", list.get(i).getStep());
-                    jSONObject.put("sequence", list.get(i).getSequence());
-                    jSONObject.put("DBP", list.get(i).getDBP());
-                    jSONObject.put("SBP", list.get(i).getSBP());
-                    jSONArray.put(jSONObject);
-                    i++;
-                } catch (JSONException e) {
-                    e = e;
-                    e.printStackTrace();
-                    return jSONArray;
-                }
+                JSONObject jSONObject = new JSONObject();
+                jSONObject.put("heart", list.get(i).getHeart());
+                jSONObject.put("step", list.get(i).getStep());
+                jSONObject.put("sequence", list.get(i).getSequence());
+                jSONObject.put("DBP", list.get(i).getDBP());
+                jSONObject.put("SBP", list.get(i).getSBP());
+                jSONArray.put(jSONObject);
+                i++;
             }
         } catch (JSONException e2) {
-            e = e2;
             jSONArray = null;
-            e.printStackTrace();
+            e2.printStackTrace();
             return jSONArray;
         }
         return jSONArray;
